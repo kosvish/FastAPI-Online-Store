@@ -15,7 +15,7 @@ class UserRead(schemas.BaseUser[int]):
         orm_mode = True
 
 
-class UserCreate(schemas.BaseUser):
+class UserCreate(schemas.BaseUserCreate):
     username: str
     email: EmailStr
     password: str
