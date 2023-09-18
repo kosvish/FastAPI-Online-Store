@@ -1,16 +1,18 @@
-# This is a sample Python script.
+from fastapi import FastAPI
+from src.auth.base_config import auth_backend, fastapi_users
+from src.schemas.user import UserRead, UserCreate
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+app = FastAPI(
+    title="Online Store"
+)
 
+app.include_router(fastapi_users.get_auth_router(auth_backend),
+                   prefix="/auth",
+                   tags=["Auth"]
+                   )
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+app.include_router(
+    fastapi_users.get_register_router(UserRead, UserCreate),
+    prefix="/auth",
+    tags=["Auth"]
+)
