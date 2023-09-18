@@ -2,7 +2,7 @@ from fastapi_users import FastAPIUsers
 from fastapi_users.authentication import CookieTransport, AuthenticationBackend, JWTStrategy
 
 from src.auth.manager import get_user_manager
-from src.models.user import user
+from src.models.user import User
 from src.config import SECRET_AUTH
 
 cookie_transport = CookieTransport(cookie_name="make_wish", cookie_max_age=3600)
@@ -18,7 +18,7 @@ auth_backend = AuthenticationBackend(
     get_strategy=get_jwt_strategy
 )
 
-fastapi_users = FastAPIUsers[user, int](
+fastapi_users = FastAPIUsers[User, int](
     get_user_manager,
     [auth_backend]
 )
