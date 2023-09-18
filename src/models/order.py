@@ -1,6 +1,6 @@
 from sqlalchemy import MetaData, Table, Column, Integer, String, Float, TIMESTAMP, ForeignKey
 from datetime import datetime
-from .user import user
+from .user import User, user
 
 metadata = MetaData()
 
