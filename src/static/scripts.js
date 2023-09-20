@@ -7,9 +7,9 @@ userIcon.addEventListener('click', async () => {
     const response = await fetch('/auth/status'); // ендпоинт для аутенфикации
     if (response.status === 200) {
         // если Пользователь аутентифицирован
-        window.location.href = '/user-profile'; // Перенаправление на страницу пользователя
+        window.location.href = '/pages/user_profile'; // Перенаправление на страницу пользователя
     } else {
         // Пользователь не аутентифицирован
-        window.location.href = '/login'; // Перенаправление на страницу входа
+        window.location.href = '/pages/login'; // Перенаправление на страницу входа
     }
 });
