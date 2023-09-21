@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Request, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi_users import FastAPIUsers
-
 from src.auth.base_config import auth_backend
 from src.auth.manager import get_user_manager
 from src.models.user import User
+
 
 router = APIRouter(
     prefix="/pages",
@@ -23,7 +23,7 @@ current_user = fastapi_users.current_user()
 
 @router.get('/base')
 def get_base_page(request: Request):
-    return templates.TemplateResponse("base.html", {"request": request})
+    return templates.TemplateResponse("base.html", {"request": request, 'user': user})
 
 
 @router.get("/user_profile")
