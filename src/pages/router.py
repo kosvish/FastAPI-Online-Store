@@ -23,7 +23,7 @@ current_user = fastapi_users.current_user()
 
 @router.get('/base')
 def get_base_page(request: Request):
-    return templates.TemplateResponse("base.html", {"request": request, 'user': user})
+    return templates.TemplateResponse("base.html", {"request": request})
 
 
 @router.get("/user_profile")
