@@ -2,8 +2,8 @@
 
 {% block content %}
     <h1>Login</h1>
-    <form method="POST" action="/auth/login"> <!-- Указываем метод POST и целевой URL, куда будут отправляться данные -->
-        <label for="username">Username:</label>
+    <form method="POST" action="/auth/login" id="loginForm">
+        <label for="username">Email:</label>
         <input type="text" id="username" name="username" required><br>
 
         <label for="password">Password:</label>
@@ -11,5 +11,28 @@
 
         <button type="submit">Login</button>
     </form>
-{% endblock %}
 
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch('/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `username=${username}&password=${password}`,
+            });
+
+            if (response.status === 204) {
+                // Редирект на страницу успеха после успешной аутентификации
+                window.location.href = '/pages/user_profile';
+            } else {
+                // Обработка ошибки
+                console.error('Ошибка аутентификации');
+            }
+        });
+    </script>
+{% endblock %}
