@@ -5,7 +5,6 @@ from src.auth.base_config import auth_backend
 from src.auth.manager import get_user_manager
 from src.models.user import User
 
-
 router = APIRouter(
     prefix="/pages",
     tags=["Pages"]
@@ -34,3 +33,8 @@ def get_user_page(request: Request, user: User = Depends(current_user)):
 @router.get("/login")
 def get_login_page(request: Request):
     return templates.TemplateResponse("user_login.html", {"request": request})
+
+
+@router.get("/register")
+def get_register_page(request: Request):
+    return templates.TemplateResponse("user_register.html", {"request": request})
