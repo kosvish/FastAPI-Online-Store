@@ -35,14 +35,24 @@
                         </li>
                     </ul>
                   <form class="d-flex">
-                            <button class="btn btn-outline-dark" type="submit">
-                                <i class="bi-cart-fill me-1"></i>
-                                Cart
-                                <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                            </button>
-                            <div id="user-icon" class="btn btn-primary">👤</div>
+                    <button class="btn btn-outline-dark" type="submit">
+                        <i class="bi-cart-fill me-1"></i>
+                        Cart
+                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                    </button>
 
-                    </form>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            👤 Меню
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="/pages/login">Логин</a></li>
+                            <li><a class="dropdown-item" href="/pages/user_profile">Профиль</a></li>
+                            <li><a class="dropdown-item" href="/pages/register">Регистрация</a></li>
+                        </ul>
+                    </div>
+                </form>
+
                             </div>
                         </div>
         </nav>    <!-- Navigation-->
