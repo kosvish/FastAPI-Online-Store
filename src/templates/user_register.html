@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container px-4 px-lg-5 my-5">
+    <div class="text-center">
+        <h2 class="display-4 fw-bolder">Регистрация пользователя</h2>
+    </div>
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-lg-6">
+            <form method="post" action="/auth/register">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Имя пользователя</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Пароль</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="is_active" name="is_active" checked>
+                    <label class="form-check-label" for="is_active">Аккаунт активен</label>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="is_superuser" name="is_superuser">
+                    <label class="form-check-label" for="is_superuser">Администратор</label>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="is_verified" name="is_verified">
+                    <label class="form-check-label" for="is_verified">Email верифицирован</label>
+                </div>
+                <button type="button" onclick="registerUser()">Зарегистрироваться</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    async function registerUser() {
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const is_active = document.getElementById('is_active').value;
+    const is_superuser = document.getElementById('is_superuser').value;
+    const is_verified = document.getElementById('is_verified').value;
+
+    const data = {
+        "email": email,
+        "password": password,
+        "is_active": is_active,
+        "is_superuser": is_superuser,
+        "is_verified": is_verified,
+        "username": username
+    };
+
+    const response = await fetch('/auth/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+
+        window.location.href = '/pages/login';
+    } else {
+
+        console.error('Ошибка при регистрации');
+    }
+}
+
+</script>
+{% endblock %}
