@@ -13,3 +13,6 @@ userIcon.addEventListener('click', async () => {
         window.location.href = '/pages/login'; // Перенаправление на страницу входа
     }
 });
+
+
+

@@ -4,6 +4,7 @@ from src.schemas.user import UserRead, UserCreate
 from src.pages.router import router as pages_router
 from src.endpoints.auth_status import router as auth_router
 from fastapi.staticfiles import StaticFiles
+from src.endpoints.product import router as product_router
 
 app = FastAPI(
     title="Online Store"
@@ -27,5 +28,7 @@ app.include_router(
     prefix="/auth",
     tags=["Auth"]
 )
+
+app.include_router(product_router)
 
 app.include_router(pages_router)
