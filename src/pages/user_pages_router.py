@@ -45,3 +45,8 @@ def get_register_page(request: Request):
 @router.get("/product/{product_id}")
 def get_product_page(request: Request, product: Product = Depends(get_current_product)):
     return templates.TemplateResponse("product.html", {"request": request, "product": product})
+
+
+@router.get("/product/add_product")
+def get_add_product_page(request: Request, user: User = Depends(current_user)):
+    return templates.TemplateResponse("add_product_form.html", {"request": request})

@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 from src.auth.base_config import auth_backend, fastapi_users
 from src.schemas.user import UserRead, UserCreate
-from src.pages.router import router as pages_router
+from src.pages.user_pages_router import router as pages_router
 from src.endpoints.auth_status import router as auth_router
 from fastapi.staticfiles import StaticFiles
 from src.endpoints.product import router as product_router
+from src.pages.product_pages_router import router as pages_product_router
+from src.pages.base_pages_router import router as pages_base_router
 
 app = FastAPI(
     title="Online Store"
@@ -30,5 +32,6 @@ app.include_router(
 )
 
 app.include_router(product_router)
-
 app.include_router(pages_router)
+app.include_router(pages_product_router)
+app.include_router(pages_base_router)
