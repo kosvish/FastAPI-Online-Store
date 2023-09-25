@@ -8,8 +8,8 @@ from src.endpoints.product import get_all_products, get_current_product
 from src.models.product import Product
 
 router = APIRouter(
-    prefix="/pages",
-    tags=["Pages"]
+    prefix="/user",
+    tags=["User_pages"]
 )
 
 fastapi_users = FastAPIUsers[User, int](
@@ -22,12 +22,8 @@ templates = Jinja2Templates(directory="src/templates")
 current_user = fastapi_users.current_user()
 
 
-@router.get('/base')
-def get_base_page(request: Request, products: Product = Depends(get_all_products)):
-    return templates.TemplateResponse("base.html", {"request": request, "products": products})
 
-
-@router.get("/user_profile")
+@router.get("/profile")
 def get_user_page(request: Request, user: User = Depends(current_user)):
     return templates.TemplateResponse("user_profile.html", {"request": request, "user": user})
 
@@ -42,11 +38,3 @@ def get_register_page(request: Request):
     return templates.TemplateResponse("user_register.html", {"request": request})
 
 
-@router.get("/product/{product_id}")
-def get_product_page(request: Request, product: Product = Depends(get_current_product)):
-    return templates.TemplateResponse("product.html", {"request": request, "product": product})
-
-
-@router.get("/product/add_product")
-def get_add_product_page(request: Request, user: User = Depends(current_user)):
-    return templates.TemplateResponse("add_product_form.html", {"request": request})
