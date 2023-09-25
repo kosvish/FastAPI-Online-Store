@@ -4,7 +4,7 @@ from fastapi_users import FastAPIUsers
 from src.auth.base_config import auth_backend
 from src.auth.manager import get_user_manager
 from src.models.user import User
-from src.endpoints.product import get_all_products
+from src.endpoints.product import get_all_products, get_current_product
 from src.models.product import Product
 
 router = APIRouter(
@@ -42,3 +42,6 @@ def get_register_page(request: Request):
     return templates.TemplateResponse("user_register.html", {"request": request})
 
 
+@router.get("/product/{product_id}")
+def get_product_page(request: Request, product: Product = Depends(get_current_product)):
+    return templates.TemplateResponse("product.html", {"request": request, "product": product})
