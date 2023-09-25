@@ -1,5 +1,5 @@
 from src.models.product import Product
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from src.schemas.product import ProductCreate
 from src.database import AsyncSession, get_async_session
 from src.models.user import User
@@ -19,6 +19,17 @@ async def get_all_products(db: AsyncSession = Depends(get_async_session)):
             result = await session.execute(stmt)
             products = result.scalars().all()
             return products
+
+
+async def get_current_product(product_id: int, db: AsyncSession = Depends(get_async_session)):
+    async with db as session:
+        async with session.begin():
+            stmt = select(Product).where(Product.id == product_id)
+            result = await session.execute(stmt)
+            product = result.scalar()
+            if not product:
+                raise HTTPException(status_code=404, detail="Product not found")
+            return product
 
 
 @router.post("/add_product")
