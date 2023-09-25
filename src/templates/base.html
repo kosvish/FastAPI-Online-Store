@@ -18,7 +18,7 @@
     <body>
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="/pages/base">Start Bootstrap</a>
+                <a class="navbar-brand" href="/pages/main">Start Bootstrap</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -46,9 +46,9 @@
                             👤 Меню
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="/pages/login">Логин</a></li>
-                            <li><a class="dropdown-item" href="/pages/user_profile">Профиль</a></li>
-                            <li><a class="dropdown-item" href="/pages/register">Регистрация</a></li>
+                            <li><a class="dropdown-item" href="/user/login">Логин</a></li>
+                            <li><a class="dropdown-item" href="/user/profile">Профиль</a></li>
+                            <li><a class="dropdown-item" href="/user/register">Регистрация</a></li>
                         </ul>
                     </div>
                 </form>
@@ -58,6 +58,7 @@
         </nav>    <!-- Navigation-->
 
         <!-- Header-->
+          {% block content %}
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
@@ -67,7 +68,6 @@
             </div>
         </header>
         <!-- Section-->
-        {% block content %}
           <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -93,7 +93,7 @@
                                 </div>
                                 <!-- Product actions-->
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/pages/product/{{ product.id }}">View options</a></div>
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/product/{{ product.id }}">View options</a></div>
                                 </div>
                             </div>
                         </div>
