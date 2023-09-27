@@ -32,6 +32,17 @@ async def get_current_product(product_id: int, db: AsyncSession = Depends(get_as
             return product
 
 
+async def get_user_product(username: str, db: AsyncSession = Depends(get_async_session)):
+    async with db as session:
+        async with session.begin():
+            stmt = select(Product).where(Product.username == username)
+            result = await session.execute(stmt)
+            product = result.scalars().all()
+            if not product:
+                raise HTTPException(status_code=404, detail="У этого продавца нет, товаров")
+            return product
+
+
 @router.post("/add_product")
 async def add_product(
                       name: Annotated[str, Form()],
