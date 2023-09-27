@@ -6,7 +6,8 @@ from src.auth.manager import get_user_manager
 from src.models.user import User
 from src.endpoints.product import get_all_products, get_current_product
 from src.models.product import Product
-
+from src.endpoints.user import view_user_profile
+from src.endpoints.product import get_user_product
 router = APIRouter(
     prefix="/user",
     tags=["User_pages"]
@@ -38,3 +39,8 @@ def get_register_page(request: Request):
     return templates.TemplateResponse("user_register.html", {"request": request})
 
 
+@router.get("/{username}")
+def get_users_profile(request: Request, user: User = Depends(view_user_profile),
+                      product: Product = Depends(get_user_product)):
+    return templates.TemplateResponse("strange_user_profile.html", {"request": request, "user": user,
+                                                                    "user_products": product})
