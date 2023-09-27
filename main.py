@@ -7,12 +7,24 @@ from fastapi.staticfiles import StaticFiles
 from src.endpoints.product import router as product_router
 from src.pages.product_pages_router import router as pages_product_router
 from src.pages.base_pages_router import router as pages_base_router
+from starlette.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title="Online Store"
 )
 
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
 app.mount("/static", StaticFiles(directory="src/static"), name="static")
+app.mount("/product_images", StaticFiles(directory="product_images"), name="product_images")
 
 app.include_router(fastapi_users.get_auth_router(auth_backend),
                    prefix="/auth",
