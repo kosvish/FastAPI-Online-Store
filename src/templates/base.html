@@ -90,7 +90,7 @@
                                         <!-- Product brand-->
                                         <p class="text-muted">Брэнд: {{ product.brand }}</p>
                                         <!-- Seller's name-->
-                                        <p class="text-muted">Продавец: {{ product.username }}</p>
+                                        <p class="text-muted">Продавец: <a href="/user/{{ product.username }}">{{ product.username }}</a></p>
                                         <!-- Product price-->
                                         {{ product.price }}
                                     </div>
