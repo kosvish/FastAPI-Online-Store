@@ -75,7 +75,11 @@
                         <div class="col mb-5">
                             <div class="card h-100">
                                 <!-- Product image-->
+                                {% if product.image_path %}
+                                <img class="card-img-top" src="{{ url_for('product_images', path=product.image_path) }}" alt="Product Image" />
+                                {% else %}
                                 <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                                {% endif %}
                                 <!-- Product details-->
                                 <div class="card-body p-4">
                                     <div class="text-center">
@@ -86,7 +90,7 @@
                                         <!-- Product brand-->
                                         <p class="text-muted">Брэнд: {{ product.brand }}</p>
                                         <!-- Seller's name-->
-                                        <p class="text-muted">Продавец: {{ product.username }}</p>
+                                        <p class="text-muted">Продавец: <a href="/user/{{ product.username }}">{{ product.username }}</a></p>
                                         <!-- Product price-->
                                         {{ product.price }}
                                     </div>

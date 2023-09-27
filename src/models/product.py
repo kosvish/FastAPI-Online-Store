@@ -13,7 +13,8 @@ product = Table(
     Column("category", String, nullable=False),
     Column("price", Float, nullable=False),
     Column("brand", String, nullable=False),
-    Column("username", ForeignKey(user.c.username), nullable=False)
+    Column("username", ForeignKey(user.c.username), nullable=False),
+    Column("image_path", String, nullable=True)
 )
 
 
@@ -26,3 +27,4 @@ class Product(Base):
     price = Column("price", Float, nullable=True)
     brand = Column("brand", String, nullable=True)
     username = Column("username", ForeignKey(user.c.username), nullable=False)
+    image_path = Column("image_path", String, nullable=True)

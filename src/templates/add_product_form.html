@@ -7,7 +7,7 @@
     </div>
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-lg-6">
-            <form method="post" action="/product/add_product" enctype="application/json">
+            <form method="post" action="/product/add_product" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="name" class="form-label">Название товара</label>
                     <input type="text" class="form-control" id="name" name="name" required>
@@ -33,44 +33,15 @@
                     <label for="brand" class="form-label">Бренд</label>
                     <input type="text" class="form-control" id="brand" name="brand" required>
                 </div>
-                <button type="button" onclick="addProduct()">Добавить товар</button>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Изображение товара</label>
+                    <input type="file" class="form-control" id="image" name="file">
+                </div>
+
+                <button type="submit">Добавить товар</button>
             </form>
         </div>
     </div>
 </div>
-<script>
-    async function addProduct() {
-        const name = document.getElementById('name').value;
-        const description = document.getElementById('description').value;
-        const category = document.getElementById('category').value;
-        const price = document.getElementById('price').value;
-        const brand = document.getElementById('brand').value;
-
-        const data = {
-            "name": name,
-            "description": description,
-            "category": category,
-            "price": price,
-            "brand": brand
-        };
-
-        const response = await fetch('/product/add_product', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (response.ok) {
-            // Обработка успешного ответа
-            window.location.href = '/pages/main'; // Перенаправление на страницу успеха
-        } else {
-            // Обработка ошибки
-            console.error('Ошибка при добавлении товара');
-        }
-    }
-</script>
-
 
 {% endblock %}

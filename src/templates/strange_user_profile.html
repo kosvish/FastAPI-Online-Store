@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Профиль продавца:</h1>
+            <p>Email: {{ user.email }}</p>
+            <p>Никнейм: {{ user.username }}</p>
+            <p>Зарегистрирован: {{ user.registered_at.strftime('%Y-%m-%d') }}</p>
+        </div>
+    </div>
+
+    <h2>Товары продавца:</h2>
+    <div class="row">
+        {% for product in user_products %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="{{ url_for('product_images', path=product.image_path) }}" class="card-img-top" alt="Product Image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">Категория: {{ product.category }}</p>
+                    <p class="card-text">Цена: {{ product.price }}</p>
+                </div>
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/product/{{ product.id }}">View options</a></div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}
